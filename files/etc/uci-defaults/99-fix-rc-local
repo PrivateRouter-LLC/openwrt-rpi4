@@ -7,7 +7,7 @@ if [ -f /etc/rc.local ]; then
 fi
 
 # Verify /pr-scripts/templates/rc.local.stage1 exists, and if so cat it into /etc/rc.local
-if [ -f /pr-scripts/templates/rc.local.stage1 ]; then
+if [ -f /pr-scripts/templates/rc.local.stage3 ]; then
     cat </pr-scripts/templates/rc.local.stage3 >/etc/rc.local
 fi
 
