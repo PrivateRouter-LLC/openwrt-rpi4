@@ -1,6 +1,4 @@
 
-exit 0
-
 # Verify if /etc/rc.local exists, if so copy it to /etc/rc.local.pr
 if [ -f /etc/rc.local ]; then
     cp /etc/rc.local /etc/rc.local.pr
