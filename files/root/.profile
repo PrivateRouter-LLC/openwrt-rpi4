@@ -1,6 +1,6 @@
 # This is where we designate the branch to use from our script repos
 # main is production and we can set others for testing.
-REPO=cleanwrt
+REPO=main
 export REPO
 
 # Source our base OpenWRT functions
@@ -15,10 +15,13 @@ log_say()
 }
 
 install_packages() {
-    # Install packages
+    # Update the package list
     log_say "Installing packages: ${1}"
     local count=$(echo "${1}" | wc -w)
     log_say "Packages to install: ${count}"
+
+    # Check for upgradable packages
+    local upgradable=$(opkg list-upgradable | cut -d ' ' -f 1)
 
     for package in ${1}; do
         if ! opkg list-installed | grep -q "^$package -"; then
@@ -32,6 +35,19 @@ install_packages() {
             fi
         else
             log_say "$package is already installed."
+            # Check if the package is in the list of upgradable packages
+            if echo "${upgradable}" | grep -q "^$package$"; then
+                log_say "An upgrade is available for $package."
+                log_say "Upgrading $package..."
+                opkg upgrade $package
+                if [ $? -eq 0 ]; then
+                    log_say "$package upgraded successfully."
+                else
+                    log_say "Failed to upgrade $package."
+                fi
+            else
+                log_say "$package is up to date."
+            fi
         fi
     done
 }
