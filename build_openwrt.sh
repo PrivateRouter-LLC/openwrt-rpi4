@@ -3,7 +3,7 @@
 BASEDIR=$(realpath "$0" | xargs dirname)
 
 OUTPUT="${BASEDIR}/images"
-BUILD_VERSION="21.02.3"
+BUILD_VERSION="21.02.7"
 BOARD_NAME="bcm27xx"
 BOARD_SUBNAME="bcm2711"
 BUILDER="https://downloads.openwrt.org/releases/${BUILD_VERSION}/targets/${BOARD_NAME}/${BOARD_SUBNAME}/openwrt-imagebuilder-${BUILD_VERSION}-${BOARD_NAME}-${BOARD_SUBNAME}.Linux-x86_64.tar.xz"

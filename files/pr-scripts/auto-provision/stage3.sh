@@ -24,6 +24,10 @@ print_logo
 # Wait for Internet connection
 wait_for_internet
 
+# Install our base requirements and dns fix
+# This also takes care of opkg update
+base_requirements_check && log_say "Requirements check successful." || { log_say "Requirements check failed."; exit 1; }
+
 # Wait for opkg to finish
 wait_for_opkg
 

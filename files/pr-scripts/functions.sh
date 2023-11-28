@@ -233,6 +233,8 @@ base_requirements_check()
 
     log_say "Updating system time using ntp; otherwise the openwrt.org certificates are rejected as not yet valid."
     ntpd -d -q -n -p 0.openwrt.pool.ntp.org
+    # Check if this command failed, if so return 1
+    [ $? -eq 0 ] || { log_say "ntpd failed"; return 1; }
 
     # Wait for opkg to be available
     wait_for_opkg
